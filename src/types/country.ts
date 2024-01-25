@@ -1,12 +1,5 @@
 export interface Country {
-	name: {
-		official: string;
-		nativeName: {
-			[key: string]: {
-				official: string;
-			};
-		};
-	};
+	name: Name;
 	cca2: string;
 	cca3: string;
 	flags: {
@@ -14,4 +7,16 @@ export interface Country {
 	};
 	altSpellings: string[];
 	idd: string;
+	
+	capital?:     string[];
+	languages?:   { [key: string]: string };
+	population:   number;
+	region:       string;
+    subregion?:   string;
+}
+
+export interface Name {
+    common:      string;
+    official:    string;
+    nativeName?: { [key: string]: string };
 }

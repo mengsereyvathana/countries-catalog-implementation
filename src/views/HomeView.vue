@@ -33,7 +33,7 @@
                             <img :src="country.flags.png" :alt="country.name.official" width="50" height="30" />
                         </td>
                         <td class="p-2 text-left">
-                            <button @click="openModal(country)">{{ country.name.official }}</button>
+                            <button @click="openModal(country)" class="hover:underline">{{ country.name.official }}</button>
                         </td>
                         <td class="p-2 text-left">{{ country.cca2 }}</td>
                         <td class="p-2 text-left">{{ country.cca3 }}</td>
@@ -68,16 +68,15 @@ const sortDirection = ref('asc');
 const currentPage = ref(1);
 const selectedCountry = ref<Country | null>(null);
 
-const fetchData = () => {
-    fetch('https://restcountries.com/v3.1/all')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            countries.value = data;
-        })
-        .catch(error => {
-            console.error(error);
-        });
+const fetchData = async () => {
+    try {
+        const response = await fetch('https://restcountries.com/v3.1/all');
+        const data = await response.json();
+        console.log(data);
+        countries.value = data;
+    } catch (error) {
+        console.error(error);
+    }
 };
 
 onMounted(() => {
